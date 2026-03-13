@@ -162,7 +162,21 @@ class MinecraftRoutineSystem {
     }
 
     updateTasks() {
+        this.updateAssigneeDropdown();
         this.renderTasks();
+    }
+
+    updateAssigneeDropdown() {
+        const select = document.getElementById('task-assignee');
+        if (!select) return;
+        const currentValue = select.value;
+        select.innerHTML = '<option value="">Sem atribuição</option>' +
+            this.participants.map(p =>
+                `<option value="${p.id}">${p.name}</option>`
+            ).join('');
+        if (currentValue && this.participants.find(p => p.id === parseInt(currentValue))) {
+            select.value = currentValue;
+        }
     }
 
     updateAchievements() {
@@ -212,7 +226,8 @@ class MinecraftRoutineSystem {
         this.saveData();
         this.renderParticipants();
         this.updateWorldProgress();
-        
+        this.updateAssigneeDropdown();
+
         // Limpar formulário
         nameInput.value = '';
         avatarSelect.value = 'stive70';
@@ -227,6 +242,7 @@ class MinecraftRoutineSystem {
             this.saveData();
             this.renderParticipants();
             this.updateWorldProgress();
+            this.updateAssigneeDropdown();
             this.showNotification('Participante removido! 🗑️');
             console.log('✅ Participante removido no índice:', index);
         }
@@ -234,11 +250,12 @@ class MinecraftRoutineSystem {
 
     addTask() {
         console.log('📝 Adicionando tarefa...');
-        
+
         const titleInput = document.getElementById('task-title');
         const descriptionInput = document.getElementById('task-description');
         const pointsInput = document.getElementById('task-points');
-        
+        const assigneeSelect = document.getElementById('task-assignee');
+
         if (!titleInput || !descriptionInput || !pointsInput) {
             console.error('❌ Elementos do formulário de tarefa não encontrados');
             alert('Erro: Elementos do formulário não encontrados!');
@@ -248,30 +265,33 @@ class MinecraftRoutineSystem {
         const title = titleInput.value.trim();
         const description = descriptionInput.value.trim();
         const points = parseInt(pointsInput.value) || 10;
-        
+        const assigneeId = assigneeSelect ? assigneeSelect.value : '';
+
         if (!title) {
             alert('Por favor, digite um título para a tarefa!');
             return;
         }
-        
+
         const task = {
             id: Date.now(),
             title: title,
             description: description,
             points: points,
+            assigneeId: assigneeId ? parseInt(assigneeId) : null,
             completed: false,
             createdAt: new Date().toISOString()
         };
-        
+
         this.tasks.push(task);
         this.saveData();
         this.renderTasks();
-        
+
         // Limpar formulário
         titleInput.value = '';
         descriptionInput.value = '';
         pointsInput.value = '10';
-        
+        if (assigneeSelect) assigneeSelect.value = '';
+
         this.showNotification('Tarefa criada com sucesso! 📝');
         console.log('✅ Tarefa criada:', task);
     }
@@ -291,9 +311,37 @@ class MinecraftRoutineSystem {
         if (task && !task.completed) {
             task.completed = true;
             task.completedAt = new Date().toISOString();
-            
+
+            // Award XP and score to assigned participant
+            if (task.assigneeId) {
+                const participant = this.participants.find(p => p.id === task.assigneeId);
+                if (participant) {
+                    participant.score += task.points;
+                    participant.experience += task.points;
+                    participant.completedTasks += 1;
+
+                    // Level up participant every 100 XP
+                    const newLevel = Math.floor(participant.experience / 100) + 1;
+                    if (newLevel > participant.level) {
+                        participant.level = newLevel;
+                        this.showNotification(`${participant.name} subiu para o nível ${newLevel}! 🎉`);
+                    }
+                }
+            }
+
+            // Add to world experience and check world level
+            this.worldExperience += task.points;
+            const nextLevelExp = this.worldLevel * 1000;
+            while (this.worldExperience >= nextLevelExp) {
+                this.worldExperience -= this.worldLevel * 1000;
+                this.worldLevel += 1;
+                this.showNotification(`Mundo subiu para o nível ${this.worldLevel}! 🌍`);
+            }
+
             this.saveData();
             this.renderTasks();
+            this.renderParticipants();
+            this.updateWorldProgress();
             this.showNotification('Tarefa completada! 🎯');
             console.log('✅ Tarefa completada:', task);
         }
@@ -371,13 +419,16 @@ class MinecraftRoutineSystem {
             return;
         }
         
-        container.innerHTML = this.tasks.map((task, index) => `
+        container.innerHTML = this.tasks.map((task, index) => {
+            const assignee = task.assigneeId ? this.participants.find(p => p.id === task.assigneeId) : null;
+            return `
             <div class="task-card ${task.completed ? 'completed' : ''}">
                 <div class="task-header">
                     <h3>${task.title}</h3>
                     <span class="task-points">${task.points} pontos</span>
                 </div>
                 <p>${task.description}</p>
+                ${assignee ? `<p class="task-assignee">👤 ${assignee.name}</p>` : ''}
                 <div class="task-footer">
                     <span class="task-status ${task.completed ? 'completed' : 'pending'}">
                         ${task.completed ? '✅ Concluída' : '⏳ Pendente'}
@@ -394,7 +445,7 @@ class MinecraftRoutineSystem {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `;}).join('');
         
         console.log('✅ Tarefas renderizadas:', this.tasks.length);
     }
@@ -494,17 +545,15 @@ class MinecraftRoutineSystem {
 
     updateWorldProgress() {
         console.log('🌍 Atualizando progresso do mundo...');
-        const totalExperience = this.participants.reduce((sum, p) => sum + p.experience, 0);
-        this.worldExperience = totalExperience;
-        
+
         // Atualizar interface
         const worldLevelElement = document.getElementById('world-level');
         const worldExperienceElement = document.getElementById('world-experience');
-        
+
         if (worldLevelElement) {
             worldLevelElement.textContent = this.worldLevel;
         }
-        
+
         if (worldExperienceElement) {
             const nextLevelExp = this.worldLevel * 1000;
             const progress = Math.min((this.worldExperience / nextLevelExp) * 100, 100);
@@ -515,7 +564,7 @@ class MinecraftRoutineSystem {
                 <span>${this.worldExperience} / ${nextLevelExp} XP</span>
             `;
         }
-        
+
         this.saveData();
     }
 
@@ -608,12 +657,15 @@ class MinecraftRoutineSystem {
 
     resetData() {
         if (confirm('Tem certeza que deseja resetar todos os dados? Esta ação não pode ser desfeita!')) {
-            localStorage.clear();
+            localStorage.removeItem('rotinacraft_participants');
+            localStorage.removeItem('rotinacraft_tasks');
+            localStorage.removeItem('rotinacraft_worldLevel');
+            localStorage.removeItem('rotinacraft_worldExperience');
             this.participants = [];
             this.tasks = [];
             this.worldLevel = 1;
             this.worldExperience = 0;
-            
+
             this.saveData();
             this.renderAll();
             this.showNotification('Dados resetados com sucesso! 🔄');
@@ -780,6 +832,63 @@ style.textContent = `
     .setting-group h3 {
         color: #FFD700;
         margin-bottom: 1rem;
+    }
+
+    .task-card.completed {
+        opacity: 0.7;
+        border-left: 4px solid #4CAF50;
+    }
+
+    .task-assignee {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 5px 0;
+    }
+
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .task-points {
+        background: #FFD700;
+        color: #333;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .task-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .task-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .participant-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .participant-info {
+        flex: 1;
+    }
+
+    .achievement-stats p {
+        margin: 5px 0;
+    }
+
+    .crafting-preview {
+        display: flex;
+        align-items: center;
     }
 `;
 document.head.appendChild(style);

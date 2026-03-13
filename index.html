@@ -86,14 +86,12 @@
                                         <option value="axolotl1">Axolotl</option>
                                         <option value="oak_tree">Carvalho</option>
                                         <option value="stone">Pedra</option>
-                                        <option value="grass">Grama</option>
+                                        <option value="grass_block">Grama</option>
                                         <option value="diamond_ore">Minério de Diamante</option>
-                                        <option value="emerald_ore">Minério de Esmeralda</option>
-                                        <option value="gold_ore">Minério de Ouro</option>
+                                        <option value="emerald">Esmeralda</option>
+                                        <option value="gold">Ouro</option>
                                         <option value="iron_ore">Minério de Ferro</option>
                                         <option value="coal_ore">Minério de Carvão</option>
-                                        <option value="redstone_ore">Minério de Redstone</option>
-                                        <option value="lapis_ore">Minério de Lápis</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="minecraft-button primary">➕ Adicionar Participante</button>
@@ -132,6 +130,12 @@
                                 <div class="form-group">
                                     <label for="task-description">Descrição:</label>
                                     <textarea id="task-description" class="minecraft-input" placeholder="Digite a descrição da tarefa" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-assignee">Participante:</label>
+                                    <select id="task-assignee" class="minecraft-select">
+                                        <option value="">Sem atribuição</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="task-points">Pontos:</label>
