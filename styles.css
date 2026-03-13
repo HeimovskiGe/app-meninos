@@ -1,0 +1,2122 @@
+/* Variáveis CSS para cores Minecraft - Pixel-Perfect (Cores Oficiais) */
+:root {
+    /* Cores oficiais do Minecraft - Baseadas no jogo real */
+    --minecraft-green-dark: #567D46;      /* Grama escura */
+    --minecraft-green-medium: #7CB342;    /* Grama média */
+    --minecraft-green-light: #8BC34A;     /* Grama clara */
+    
+    /* Marrons (Madeira/Terra) - Cores reais do Minecraft */
+    --minecraft-brown-dark: #8B4513;      /* Marrom escuro (Saddle Brown) */
+    --minecraft-brown-medium: #A0522D;    /* Marrom médio (Sienna) */
+    --minecraft-brown-light: #CD853F;     /* Marrom claro (Peru) */
+    
+    /* Azuis (Água/Céu/Diamante) - Cores reais */
+    --minecraft-blue-sky: #87CEEB;        /* Céu (Sky Blue) */
+    --minecraft-blue-water: #4A90E2;      /* Água */
+    --minecraft-blue-diamond: #00BCD4;    /* Diamante */
+    
+    /* Cinzas (Pedra/Ferro/Fundo GUI) - Cores reais */
+    --minecraft-gray-dark: #2F2F2F;       /* Pedra escura */
+    --minecraft-gray-medium: #4A4A4A;     /* Pedra média */
+    --minecraft-gray-light: #696969;      /* Pedra clara */
+    
+    /* Destaques/Recursos - Cores reais do Minecraft */
+    --minecraft-gold: #FFD700;            /* Ouro (Gold) */
+    --minecraft-redstone: #DC143C;        /* Redstone (Crimson) */
+    --minecraft-emerald: #50C878;         /* Esmeralda (Emerald) */
+    --minecraft-iron: #C0C0C0;            /* Ferro (Silver) */
+    --minecraft-coal: #2F2F2F;            /* Carvão */
+    --minecraft-lapis: #1E90FF;           /* Lapis Lazuli (Dodger Blue) */
+    
+    /* Cores base */
+    --minecraft-white: #FFFFFF;
+    --minecraft-black: #000000;
+    
+    /* Texturas reais do Minecraft */
+    --texture-stone: url('CSS-Minecraft-main/assets/stone.png');
+    --texture-grass: url('CSS-Minecraft-main/assets/grass_side_carried.png');
+    --texture-grass-top: url('CSS-Minecraft-main/assets/grass_carried.png');
+    --texture-dirt: url('CSS-Minecraft-main/assets/dirt.png');
+    --texture-oak-log: url('CSS-Minecraft-main/assets/log_oak.png');
+    --texture-oak-planks: url('CSS-Minecraft-main/assets/oak_planks.png');
+    --texture-leaves: url('CSS-Minecraft-main/assets/azalea_leaves.png');
+    --texture-glass: url('CSS-Minecraft-main/assets/glass.png');
+    
+    /* Variáveis de tamanho e espaçamento */
+    --minecraft-block-size: 16px;
+    --minecraft-border-thickness: 2px;
+    --minecraft-shadow-offset: 4px;
+}
+
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Importar fonte pixelada */
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('data:font/woff2;base64,d09GMgABAAAAAA...') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Press Start 2P', 'Orbitron', monospace;
+    background: var(--minecraft-gray-dark);
+    min-height: 100vh;
+    color: var(--minecraft-white);
+    overflow-x: hidden;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+    /* Background estilo ROTINACRAFT com texturas reais */
+.minecraft-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+            /* Céu Minecraft autêntico - Cores reais */
+            linear-gradient(to bottom, var(--minecraft-blue-sky) 0%, #98D8E8 30%, #B0E0E6 60%, #E0F6FF 100%),
+            /* Nuvens estilizadas */
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 50%),
+            radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.7) 0%, transparent 50%);
+    z-index: -1;
+        animation: minecraftPanorama 120s linear infinite;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Gradientes de overlay baseados na logo ROTINACRAFT */
+.panorama-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        /* Textura de grama no topo */
+        linear-gradient(to bottom, 
+            rgba(139, 69, 19, 0.3) 0%, 
+            rgba(139, 69, 19, 0.1) 20%, 
+            transparent 40%);
+    z-index: 1;
+}
+
+.panorama-overlay-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        /* Textura de terra na base */
+        linear-gradient(to top, 
+            rgba(139, 69, 19, 0.4) 0%, 
+            rgba(139, 69, 19, 0.2) 30%, 
+            transparent 60%);
+    z-index: 2;
+}
+
+/* Animação do panorama Minecraft */
+@keyframes minecraftPanorama {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% { 
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* Logo ROTINACRAFT estilizado com texturas Minecraft */
+.rotinacraft-logo-text {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--minecraft-gold);
+    text-shadow: 
+        var(--minecraft-shadow-offset) var(--minecraft-shadow-offset) 0px var(--minecraft-black),
+        calc(var(--minecraft-shadow-offset) * 2) calc(var(--minecraft-shadow-offset) * 2) 0px var(--minecraft-brown-dark),
+        calc(var(--minecraft-shadow-offset) * 3) calc(var(--minecraft-shadow-offset) * 3) 0px var(--minecraft-brown-medium);
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 4px;
+    animation: logoGlow 2s ease-in-out infinite alternate;
+    text-align: center;
+    margin-bottom: 10px;
+    /* Efeito de borda pixelada */
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gold);
+    padding: 15px;
+    background: 
+        linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.8), 
+            rgba(255, 215, 0, 0.3), 
+            rgba(139, 69, 19, 0.8));
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    box-shadow: 
+        inset 0 0 20px rgba(255, 215, 0, 0.2),
+        0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes logoGlow {
+    from { 
+        text-shadow: 
+            var(--minecraft-shadow-offset) var(--minecraft-shadow-offset) 0px var(--minecraft-black),
+            calc(var(--minecraft-shadow-offset) * 2) calc(var(--minecraft-shadow-offset) * 2) 0px var(--minecraft-brown-dark),
+            calc(var(--minecraft-shadow-offset) * 3) calc(var(--minecraft-shadow-offset) * 3) 0px var(--minecraft-brown-medium),
+            0 0 20px rgba(255, 215, 0, 0.5);
+        box-shadow: 
+            inset 0 0 20px rgba(255, 215, 0, 0.2),
+            0 0 30px rgba(255, 215, 0, 0.3);
+    }
+    to { 
+        text-shadow: 
+            var(--minecraft-shadow-offset) var(--minecraft-shadow-offset) 0px var(--minecraft-black),
+            calc(var(--minecraft-shadow-offset) * 2) calc(var(--minecraft-shadow-offset) * 2) 0px var(--minecraft-brown-dark),
+            calc(var(--minecraft-shadow-offset) * 3) calc(var(--minecraft-shadow-offset) * 3) 0px var(--minecraft-brown-medium),
+            0 0 40px rgba(255, 215, 0, 0.8),
+            0 0 60px rgba(255, 215, 0, 0.6);
+        box-shadow: 
+            inset 0 0 30px rgba(255, 215, 0, 0.4),
+            0 0 50px rgba(255, 215, 0, 0.5);
+    }
+}
+
+/* Header principal com estilo Minecraft autêntico */
+.minecraft-header {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(135deg, 
+            rgba(139, 69, 19, 0.9), 
+            rgba(160, 122, 79, 0.9), 
+            rgba(139, 69, 19, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    box-shadow: 
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-brown-dark),
+        0 calc(var(--minecraft-shadow-offset) * 2) 0px 0px var(--minecraft-brown-medium);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Navegação com estilo Minecraft autêntico */
+.minecraft-nav {
+    background: 
+        /* Textura de pedra */
+        var(--texture-stone),
+        linear-gradient(135deg, 
+            rgba(58, 58, 58, 0.9), 
+            rgba(80, 80, 80, 0.9), 
+            rgba(58, 58, 58, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    box-shadow: 
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-gray-dark),
+        0 calc(var(--minecraft-shadow-offset) * 2) 0px 0px var(--minecraft-gray-medium);
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Abas de navegação estilo Minecraft */
+.nav-tab {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.8), 
+            rgba(160, 122, 79, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    color: var(--minecraft-white);
+    padding: 12px 20px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.3),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-brown-dark);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+}
+
+.nav-tab:hover {
+    background: 
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(160, 122, 79, 0.9), 
+            rgba(192, 160, 112, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    transform: translateY(-2px);
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.2),
+        0 calc(var(--minecraft-shadow-offset) + 2px) 0px 0px var(--minecraft-brown-dark);
+}
+
+.nav-tab.active {
+    background: 
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(255, 215, 0, 0.3), 
+            rgba(160, 122, 79, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+    box-shadow: 
+        inset 0 0 20px rgba(255, 215, 0, 0.2),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-brown-dark),
+        0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Painéis Minecraft com texturas reais */
+.minecraft-panel {
+    background: 
+        /* Textura de pedra */
+        var(--texture-stone),
+        linear-gradient(135deg, 
+            rgba(58, 58, 58, 0.8), 
+            rgba(80, 80, 80, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-gray-dark);
+    position: relative;
+}
+
+.minecraft-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Textura de vidro sutil */
+        var(--texture-glass);
+    background-size: calc(var(--minecraft-block-size) * 2) calc(var(--minecraft-block-size) * 2);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Cabeçalhos dos painéis */
+.panel-header {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.9), 
+            rgba(160, 122, 79, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    color: var(--minecraft-gold);
+    font-weight: bold;
+    padding: 10px 15px;
+    margin: -20px -20px 20px -20px;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Botões estilo Minecraft autêntico */
+.minecraft-button {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.9), 
+            rgba(160, 122, 79, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    color: var(--minecraft-white);
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.3),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-brown-dark);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+}
+
+.minecraft-button:hover {
+    background: 
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(160, 122, 79, 0.9), 
+            rgba(192, 160, 112, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    transform: translateY(-2px);
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.2),
+        0 calc(var(--minecraft-shadow-offset) + 2px) 0px 0px var(--minecraft-brown-dark);
+}
+
+.minecraft-button:active {
+    transform: translateY(0px);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.4),
+        0 2px 0px 0px var(--minecraft-brown-dark);
+}
+
+/* Botões especiais com texturas diferentes */
+.minecraft-button.warning {
+    background: 
+        /* Textura de redstone */
+        var(--texture-stone),
+        linear-gradient(45deg, 
+            rgba(220, 20, 60, 0.8), 
+            rgba(139, 0, 0, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-redstone);
+}
+
+.minecraft-button.danger {
+    background: 
+        /* Textura de obsidian */
+        var(--texture-stone),
+        linear-gradient(45deg, 
+            rgba(139, 0, 0, 0.8), 
+            rgba(105, 0, 0, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: #8B0000;
+}
+
+.minecraft-button.primary {
+    background: 
+        /* Textura de esmeralda */
+        var(--texture-stone),
+        linear-gradient(45deg, 
+            rgba(80, 200, 120, 0.8), 
+            rgba(60, 180, 100, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-emerald);
+}
+
+.minecraft-button.secondary {
+    background: 
+        /* Textura de diamante */
+        var(--texture-stone),
+        linear-gradient(45deg, 
+            rgba(0, 188, 212, 0.8), 
+            rgba(0, 150, 170, 0.8));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-blue-diamond);
+}
+
+/* Seção de progresso do mundo com texturas reais */
+.world-progress-section {
+    margin-bottom: 30px;
+}
+
+.world-panel {
+    background: 
+        /* Textura de diamante */
+        var(--texture-stone),
+        linear-gradient(135deg, 
+            rgba(0, 188, 212, 0.8), 
+            rgba(255, 215, 0, 0.3));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gold);
+    box-shadow: 
+        inset 0 0 20px rgba(255, 215, 0, 0.2),
+        0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Barras de progresso estilo Minecraft */
+.progress-background {
+    background: 
+        /* Textura de pedra */
+        var(--texture-stone),
+        rgba(139, 69, 19, 0.5);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    background: 
+        /* Textura de grama */
+        var(--texture-grass),
+        linear-gradient(90deg, 
+            var(--minecraft-emerald), 
+            var(--minecraft-green-light));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    height: 100%;
+    transition: width 0.5s ease;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Cards de participantes com texturas reais */
+.participant-card {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(135deg, 
+            rgba(139, 69, 19, 0.8), 
+            rgba(255, 215, 0, 0.1));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-brown-dark);
+}
+
+.participant-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--minecraft-gold);
+    box-shadow: 
+        inset 0 0 25px rgba(255, 215, 0, 0.1),
+        0 calc(var(--minecraft-shadow-offset) + 8px) 0px 0px var(--minecraft-brown-dark),
+        0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Efeito de brilho nos cards */
+.participant-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: 
+        /* Textura de vidro para efeito de brilho */
+        var(--texture-glass);
+    background-size: calc(var(--minecraft-block-size) * 3) calc(var(--minecraft-block-size) * 3);
+    opacity: 0.3;
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.participant-card:hover::before {
+    left: 100%;
+}
+
+/* Badges de nível com texturas */
+.participant-level-badge {
+    background: 
+        /* Textura de ouro */
+        var(--texture-stone),
+        linear-gradient(45deg, 
+            var(--minecraft-gold), 
+            #FFA500);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    padding: 5px 12px;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.2),
+        0 2px 0px 0px var(--minecraft-brown-dark);
+}
+
+/* Conquistas coletivas com texturas */
+.collective-achievement-card {
+    background: 
+        /* Textura de pedra */
+        var(--texture-stone),
+        rgba(0, 0, 0, 0.6);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-gray-dark);
+}
+
+.collective-achievement-card.unlocked {
+    background: 
+        /* Textura de esmeralda */
+        var(--texture-stone),
+        linear-gradient(135deg, 
+            rgba(76, 175, 80, 0.1), 
+            rgba(0, 0, 0, 0.6));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+    box-shadow: 
+        inset 0 0 25px rgba(255, 215, 0, 0.1),
+        0 var(--minecraft-shadow-offset) 0px 0px var(--minecraft-gray-dark),
+        0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Benefícios com texturas */
+.benefit-section {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        rgba(139, 69, 19, 0.3);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.2),
+        0 2px 0px 0px var(--minecraft-brown-dark);
+}
+
+/* Inputs e selects estilo Minecraft */
+.minecraft-input,
+.minecraft-select {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        rgba(139, 69, 19, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    color: var(--minecraft-white);
+    padding: 10px 15px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.3),
+        0 2px 0px 0px var(--minecraft-brown-dark);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+}
+
+.minecraft-input:focus,
+.minecraft-select:focus {
+    outline: none;
+    border-color: var(--minecraft-gold);
+    box-shadow: 
+        inset 0 0 15px rgba(255, 215, 0, 0.2),
+        0 2px 0px 0px var(--minecraft-brown-dark),
+        0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Modais estilo Minecraft */
+.minecraft-modal {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: 
+        /* Textura de obsidian */
+        var(--texture-stone),
+        linear-gradient(135deg, 
+            rgba(58, 58, 58, 0.95), 
+            rgba(80, 80, 80, 0.95));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    border-radius: 0; /* Sem bordas arredondadas para estilo pixelado */
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.modal-header {
+    background: 
+        /* Textura de madeira de carvalho */
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.9), 
+            rgba(160, 122, 79, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    color: var(--minecraft-gold);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+}
+
+/* Bottom bar com textura de pedra */
+.minecraft-bottom-bar {
+    background: 
+        /* Textura de pedra */
+        var(--texture-stone),
+        linear-gradient(90deg, 
+            rgba(139, 69, 19, 0.9), 
+            rgba(160, 82, 45, 0.9), 
+            rgba(139, 69, 19, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-top: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    box-shadow: 
+        0 calc(-1 * var(--minecraft-shadow-offset)) 0px 0px var(--minecraft-brown-dark),
+        0 calc(-1 * calc(var(--minecraft-shadow-offset) * 2)) 0px 0px var(--minecraft-brown-medium);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.bottom-bar-left,
+.bottom-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bottom-bar-text {
+    color: var(--minecraft-gold);
+    font-family: 'Press Start 2P', 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-shadow: 1px 1px 0px var(--minecraft-brown-dark);
+}
+
+/* Splash text estilo Minecraft real */
+@keyframes splashFloat {
+    0%, 100% { 
+        transform: rotate(-20deg) translateY(0px); 
+        opacity: 1;
+    }
+    50% { 
+        transform: rotate(-20deg) translateY(-10px); 
+        opacity: 0.9;
+    }
+}
+
+.minecraft-splash {
+    font-family: 'Orbitron', monospace;
+    text-shadow: 
+        2px 2px 0px var(--minecraft-black),
+        4px 4px 0px var(--minecraft-brown-dark);
+    animation: splashFloat 3s ease-in-out infinite;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Estilos para elementos flutuantes */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-block {
+    position: absolute;
+    font-size: 2rem;
+    animation: minecraftFloat 8s ease-in-out infinite;
+    opacity: 0.7;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes minecraftFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Estilos para elementos específicos que estavam faltando */
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--minecraft-white);
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    margin-bottom: 10px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.version {
+    font-size: 1rem;
+    color: var(--minecraft-gold);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+}
+
+/* Estilos para o grid de participantes */
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para seções */
+.minecraft-section {
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    color: var(--minecraft-gold);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-gold);
+    padding-bottom: 10px;
+}
+
+/* Estilos para o grid de tarefas */
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Estilos para o grid de conquistas */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Estilos para o grid de conquistas coletivas */
+.collective-achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilos para o grid de benefícios */
+.unlocked-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilos para o botão flutuante */
+.minecraft-floating-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: 
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(76, 175, 80, 0.9), 
+            rgba(69, 160, 73, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-emerald);
+    border-radius: 0;
+    color: var(--minecraft-white);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.3),
+        0 4px 0px 0px var(--minecraft-emerald);
+    transition: all 0.3s ease;
+}
+
+.minecraft-floating-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 7px 0px 0px var(--minecraft-emerald);
+}
+
+/* Estilos para o botão de reset */
+.reset-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Estilos para o sistema de crafting */
+.crafting-container {
+    padding: 20px;
+}
+
+.crafting-header h2 {
+    color: var(--minecraft-gold);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+}
+
+.crafting-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.crafting-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    background: 
+        var(--texture-oak-planks),
+        rgba(139, 69, 19, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    padding: 10px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        0 4px 0px 0px var(--minecraft-brown-dark);
+}
+
+.crafting-slot {
+    width: 50px;
+    height: 50px;
+    background: 
+        var(--texture-stone),
+        rgba(58, 58, 58, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.crafting-slot:hover {
+    background: 
+        var(--texture-stone),
+        rgba(80, 80, 80, 0.9);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+}
+
+.crafting-arrow {
+    font-size: 2rem;
+    color: var(--minecraft-gold);
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+}
+
+.crafting-result {
+    text-align: center;
+}
+
+.crafting-inventory h3 {
+    color: var(--minecraft-gold);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 5px;
+}
+
+.inventory-slot {
+    width: 40px;
+    height: 40px;
+    background: 
+        var(--texture-stone),
+        rgba(58, 58, 58, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: grab;
+    transition: all 0.2s ease;
+    box-shadow: 
+        inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.inventory-slot:hover {
+    background: 
+        var(--texture-stone),
+        rgba(80, 80, 80, 0.9);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+}
+
+/* Estilos para o sistema de partículas */
+.particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--minecraft-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: minecraftParticle 4s linear forwards;
+    box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes minecraftParticle {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) rotate(720deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Estilos para o sistema de confete */
+.minecraft-confetti {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Estilos para o sistema de loading */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--minecraft-gold);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para o sistema de tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--minecraft-white);
+    text-align: center;
+    border-radius: 0;
+    padding: 8px;
+    position: absolute;
+    z-index: 10002;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    font-family: 'Press Start 2P', monospace;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para o sistema de scroll */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(139, 69, 19, 0.3);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--minecraft-brown-dark);
+    border-radius: 0;
+    border: var(--minecraft-border-thickness) solid rgba(139, 69, 19, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--minecraft-brown-medium);
+}
+
+/* Estilos para o sistema de seleção */
+::selection {
+    background: rgba(255, 215, 0, 0.3);
+    color: var(--minecraft-white);
+}
+
+::-moz-selection {
+    background: rgba(255, 215, 0, 0.3);
+    color: var(--minecraft-white);
+}
+
+/* Estilos para o sistema de foco */
+.minecraft-button:focus,
+.minecraft-input:focus,
+.minecraft-select:focus {
+    outline: 3px solid var(--minecraft-gold);
+    outline-offset: 2px;
+}
+
+.nav-tab:focus {
+    outline: 3px solid var(--minecraft-gold);
+    outline-offset: 2px;
+}
+
+/* Estilos para o sistema de hover para dispositivos touch */
+@media (hover: none) {
+    .minecraft-button:hover,
+    .participant-card:hover,
+    .task-card:hover,
+    .achievement-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .minecraft-button:active,
+    .participant-card:active,
+    .task-card:active,
+    .achievement-card:active {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Estilos para o sistema de impressão */
+@media print {
+    .minecraft-nav,
+    .minecraft-bottom-bar,
+    .minecraft-floating-btn,
+    .reset-btn {
+        display: none !important;
+    }
+    
+    .minecraft-container {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .minecraft-panel {
+        border: 1px solid #000 !important;
+        background: white !important;
+        color: black !important;
+    }
+    
+    .participant-card,
+    .task-card,
+    .achievement-card {
+        border: 1px solid #000 !important;
+        background: white !important;
+        color: black !important;
+        break-inside: avoid;
+    }
+}
+
+/* Container principal */
+.minecraft-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+/* Header principal estilo Minecraft real */
+.minecraft-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding: 40px 0;
+    z-index: 10;
+}
+
+.title-container {
+    position: relative;
+    z-index: 10;
+}
+
+.minecraft-logo {
+    margin-bottom: 20px;
+}
+
+/* Estilos para elementos específicos que estavam faltando */
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--minecraft-white);
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    margin-bottom: 10px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.version {
+    font-size: 1rem;
+    color: var(--minecraft-gold);
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+}
+
+/* Estilos para o grid de participantes */
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para seções */
+.minecraft-section {
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    color: var(--minecraft-gold);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+    border-bottom: var(--minecraft-border-thickness) solid var(--minecraft-gold);
+    padding-bottom: 10px;
+}
+
+/* Estilos para o grid de tarefas */
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Estilos para o grid de conquistas */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Estilos para o grid de conquistas coletivas */
+.collective-achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilos para o grid de benefícios */
+.unlocked-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilos para o botão flutuante */
+.minecraft-floating-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: 
+        var(--texture-oak-planks),
+        linear-gradient(45deg, 
+            rgba(76, 175, 80, 0.9), 
+            rgba(69, 160, 73, 0.9));
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-emerald);
+    border-radius: 0;
+    color: var(--minecraft-white);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.3),
+        0 4px 0px 0px var(--minecraft-emerald);
+    transition: all 0.3s ease;
+}
+
+.minecraft-floating-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 7px 0px 0px var(--minecraft-emerald);
+}
+
+/* Estilos para o botão de reset */
+.reset-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Estilos para o sistema de crafting */
+.crafting-container {
+    padding: 20px;
+}
+
+.crafting-header h2 {
+    color: var(--minecraft-gold);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+}
+
+.crafting-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.crafting-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    background: 
+        var(--texture-oak-planks),
+        rgba(139, 69, 19, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    padding: 10px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        0 4px 0px 0px var(--minecraft-brown-dark);
+}
+
+.crafting-slot {
+    width: 50px;
+    height: 50px;
+    background: 
+        var(--texture-stone),
+        rgba(58, 58, 58, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.crafting-slot:hover {
+    background: 
+        var(--texture-stone),
+        rgba(80, 80, 80, 0.9);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+}
+
+.crafting-arrow {
+    font-size: 2rem;
+    color: var(--minecraft-gold);
+    text-shadow: 2px 2px 0px var(--minecraft-black);
+}
+
+.crafting-result {
+    text-align: center;
+}
+
+.crafting-inventory h3 {
+    color: var(--minecraft-gold);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0px var(--minecraft-black);
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+    }
+    
+    .inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 5px;
+}
+
+.inventory-slot {
+    width: 40px;
+    height: 40px;
+    background: 
+        var(--texture-stone),
+        rgba(58, 58, 58, 0.8);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-gray-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: grab;
+    transition: all 0.2s ease;
+    box-shadow: 
+        inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.inventory-slot:hover {
+    background: 
+        var(--texture-stone),
+        rgba(80, 80, 80, 0.9);
+    background-size: var(--minecraft-block-size) var(--minecraft-block-size), cover;
+    border-color: var(--minecraft-gold);
+}
+
+/* Estilos para o sistema de partículas */
+.particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--minecraft-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: minecraftParticle 4s linear forwards;
+    box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes minecraftParticle {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) rotate(720deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Estilos para o sistema de confete */
+.minecraft-confetti {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Estilos para o sistema de loading */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--minecraft-gold);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para o sistema de tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--minecraft-white);
+    text-align: center;
+    border-radius: 0;
+    padding: 8px;
+    position: absolute;
+    z-index: 10002;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    border: var(--minecraft-border-thickness) solid var(--minecraft-brown-dark);
+    font-family: 'Press Start 2P', monospace;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para o sistema de scroll */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(139, 69, 19, 0.3);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--minecraft-brown-dark);
+    border-radius: 0;
+    border: var(--minecraft-border-thickness) solid rgba(139, 69, 19, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--minecraft-brown-medium);
+}
+
+/* Estilos para o sistema de seleção */
+::selection {
+    background: rgba(255, 215, 0, 0.3);
+    color: var(--minecraft-white);
+}
+
+::-moz-selection {
+    background: rgba(255, 215, 0, 0.3);
+    color: var(--minecraft-white);
+}
+
+/* Estilos para o sistema de foco */
+.minecraft-button:focus,
+.minecraft-input:focus,
+.minecraft-select:focus {
+    outline: 3px solid var(--minecraft-gold);
+    outline-offset: 2px;
+}
+
+.nav-tab:focus {
+    outline: 3px solid var(--minecraft-gold);
+    outline-offset: 2px;
+}
+
+/* Estilos para o sistema de hover para dispositivos touch */
+@media (hover: none) {
+    .minecraft-button:hover,
+    .participant-card:hover,
+    .task-card:hover,
+.achievement-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .minecraft-button:active,
+    .participant-card:active,
+    .task-card:active,
+    .achievement-card:active {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ===== ESTRUTURAS 3D DO MINECRAFT ===== */
+
+/* Blocos 3D com CSS */
+.minecraft-block-3d {
+  --cube-size: 4rem;
+  --camera-distance: 30rem;
+  position: relative;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(45deg);
+  transition: transform 0.3s ease;
+}
+
+.minecraft-block-3d:hover {
+  transform: rotateX(-15deg) rotateY(50deg) scale(1.1);
+}
+
+.minecraft-block-3d .face {
+  position: absolute;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid var(--minecraft-brown-dark);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.minecraft-block-3d .front {
+  transform: translateZ(calc(var(--cube-size) / 2));
+  background-image: var(--texture-stone);
+}
+
+.minecraft-block-3d .back {
+  transform: translateZ(calc(-1 * var(--cube-size) / 2)) rotateY(180deg);
+  background-image: var(--texture-stone);
+}
+
+.minecraft-block-3d .right {
+  transform: translateX(calc(var(--cube-size) / 2)) rotateY(90deg);
+  background-image: var(--texture-stone);
+}
+
+.minecraft-block-3d .left {
+  transform: translateX(calc(-1 * var(--cube-size) / 2)) rotateY(-90deg);
+  background-image: var(--texture-stone);
+}
+
+.minecraft-block-3d .top {
+  transform: translateY(calc(-1 * var(--cube-size) / 2)) rotateX(90deg);
+  background-image: var(--texture-grass);
+}
+
+.minecraft-block-3d .bottom {
+  transform: translateY(calc(var(--cube-size) / 2)) rotateX(-90deg);
+  background-image: var(--texture-dirt);
+}
+
+/* Blocos específicos */
+.minecraft-block-3d.stone .face {
+  background-image: var(--texture-stone);
+}
+
+.minecraft-block-3d.grass .face {
+  background-image: var(--texture-grass);
+}
+
+.minecraft-block-3d.grass .top {
+  background-image: var(--texture-grass-top);
+}
+
+.minecraft-block-3d.oak-planks .face {
+  background-image: var(--texture-oak-planks);
+}
+
+.minecraft-block-3d.glass .face {
+  background-image: var(--texture-glass);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Personagem Steve 3D */
+.steve-3d {
+  --steve-size: 6rem;
+  position: relative;
+  width: var(--steve-size);
+  height: calc(var(--steve-size) * 2);
+  transform-style: preserve-3d;
+  transform: rotateY(-30deg);
+  transition: transform 0.3s ease;
+}
+
+.steve-3d:hover {
+  transform: rotateY(-20deg) scale(1.05);
+}
+
+.steve-3d .part {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.steve-3d .head {
+  width: var(--steve-size);
+  height: var(--steve-size);
+  top: 0;
+  left: 0;
+}
+
+.steve-3d .torso {
+  width: var(--steve-size);
+  height: var(--steve-size);
+  top: var(--steve-size);
+  left: 0;
+}
+
+.steve-3d .arm-left,
+.steve-3d .arm-right {
+  width: calc(var(--steve-size) * 0.4);
+  height: var(--steve-size);
+}
+
+.steve-3d .arm-left {
+  top: var(--steve-size);
+  left: calc(-1 * var(--steve-size) * 0.4);
+}
+
+.steve-3d .arm-right {
+  top: var(--steve-size);
+  right: calc(-1 * var(--steve-size) * 0.4);
+}
+
+.steve-3d .leg-left,
+.steve-3d .leg-right {
+  width: calc(var(--steve-size) * 0.4);
+  height: var(--steve-size);
+}
+
+.steve-3d .leg-left {
+  top: calc(var(--steve-size) * 2);
+  left: calc(var(--steve-size) * 0.1);
+}
+
+.steve-3d .leg-right {
+  top: calc(var(--steve-size) * 2);
+  right: calc(var(--steve-size) * 0.1);
+}
+
+.steve-3d .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--minecraft-skin-color);
+  border: 2px solid var(--minecraft-brown-dark);
+}
+
+.steve-3d .head .front {
+  background: var(--minecraft-skin-color);
+  border-radius: 20% 20% 30% 30%;
+}
+
+.steve-3d .torso .front {
+  background: var(--minecraft-blue-shirt);
+}
+
+.steve-3d .arm-left .front,
+.steve-3d .arm-right .front {
+  background: var(--minecraft-skin-color);
+}
+
+.steve-3d .leg-left .front,
+.steve-3d .leg-right .front {
+  background: var(--minecraft-blue-pants);
+}
+
+/* Sistema de Crafting 3D */
+.crafting-table-3d {
+  --table-size: 8rem;
+  position: relative;
+  width: var(--table-size);
+  height: var(--table-size);
+  transform-style: preserve-3d;
+  transform: rotateX(-15deg) rotateY(30deg);
+  margin: 2rem auto;
+}
+
+.crafting-table-3d .table-top {
+  position: absolute;
+  width: var(--table-size);
+  height: var(--table-size);
+  background-image: var(--texture-oak-planks);
+  transform: translateZ(calc(var(--table-size) * 0.1));
+  border: 3px solid var(--minecraft-brown-dark);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.crafting-table-3d .table-legs {
+  position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.crafting-table-3d .leg {
+  position: absolute;
+  width: calc(var(--table-size) * 0.15);
+  height: calc(var(--table-size) * 0.3);
+  background-image: var(--texture-oak-planks);
+  border: 2px solid var(--minecraft-brown-dark);
+}
+
+.crafting-table-3d .leg:nth-child(1) {
+  top: calc(var(--table-size) * 0.1);
+  left: calc(var(--table-size) * 0.1);
+}
+
+.crafting-table-3d .leg:nth-child(2) {
+  top: calc(var(--table-size) * 0.1);
+  right: calc(var(--table-size) * 0.1);
+}
+
+.crafting-table-3d .leg:nth-child(3) {
+  bottom: calc(var(--table-size) * 0.1);
+  left: calc(var(--table-size) * 0.1);
+}
+
+.crafting-table-3d .leg:nth-child(4) {
+  bottom: calc(var(--table-size) * 0.1);
+  right: calc(var(--table-size) * 0.1);
+}
+
+/* Grid de Crafting 3D */
+.crafting-grid-3d {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.crafting-slot-3d {
+  width: calc(var(--table-size) * 0.2);
+  height: calc(var(--table-size) * 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--minecraft-brown-dark);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.crafting-slot-3d:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--minecraft-gold);
+  transform: scale(1.1);
+}
+
+.crafting-slot-3d.filled {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: var(--minecraft-emerald);
+}
+
+/* Resultado do Crafting 3D */
+.crafting-result-3d {
+  position: absolute;
+  top: 50%;
+  right: calc(-1 * var(--table-size) * 0.8);
+  transform: translateY(-50%);
+  width: calc(var(--table-size) * 0.3);
+  height: calc(var(--table-size) * 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid var(--minecraft-gold);
+  border-radius: 8px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--minecraft-gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Animação de Crafting */
+@keyframes craftingSuccess {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.crafting-result-3d.success {
+  animation: craftingSuccess 0.8s ease-in-out;
+  background: rgba(76, 175, 80, 0.3);
+  border-color: var(--minecraft-emerald);
+}
+
+/* Blocos flutuantes animados */
+.floating-blocks {
+    position: absolute;
+    top: 0;
+  left: 0;
+    width: 100%;
+    height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-block {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  background-size: cover;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.floating-block.diamond {
+  background-image: var(--texture-diamond);
+  animation-delay: 0s;
+}
+
+.floating-block.emerald {
+  background-image: var(--texture-emerald);
+  animation-delay: 1s;
+}
+
+.floating-block.gold {
+  background-image: var(--texture-gold);
+  animation-delay: 2s;
+}
+
+.floating-block.iron {
+  background-image: var(--texture-iron);
+  animation-delay: 3s;
+}
+
+.floating-block.coal {
+  background-image: var(--texture-coal);
+  animation-delay: 4s;
+}
+
+.floating-block.redstone {
+  background-image: var(--texture-redstone);
+  animation-delay: 5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Portal do Nether */
+.nether-portal {
+  --portal-size: 12rem;
+  position: relative;
+  width: var(--portal-size);
+  height: calc(var(--portal-size) * 1.5);
+  margin: 2rem auto;
+  transform-style: preserve-3d;
+  transform: rotateX(-10deg);
+}
+
+.nether-portal .frame {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1rem solid var(--minecraft-obsidian);
+  background: linear-gradient(45deg, var(--minecraft-purple), var(--minecraft-dark-purple));
+  box-shadow: 
+    0 0 30px var(--minecraft-purple),
+    inset 0 0 30px var(--minecraft-dark-purple);
+}
+
+.nether-portal .portal-effect {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  background: 
+    radial-gradient(circle, transparent 30%, var(--minecraft-purple) 70%),
+    linear-gradient(45deg, var(--minecraft-dark-purple), var(--minecraft-purple));
+  animation: portalSwirl 3s linear infinite;
+}
+
+@keyframes portalSwirl {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mesa de Encantamento */
+.enchanting-table {
+  --table-size: 10rem;
+  position: relative;
+  width: var(--table-size);
+  height: var(--table-size);
+  margin: 2rem auto;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(15deg);
+}
+
+.enchanting-table .table {
+  position: absolute;
+        width: 100%;
+  height: 100%;
+  background-image: var(--texture-obsidian);
+  border: 3px solid var(--minecraft-purple);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.enchanting-table .book {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--table-size) * 0.4);
+  height: calc(var(--table-size) * 0.3);
+  background: linear-gradient(45deg, var(--minecraft-brown), var(--minecraft-brown-dark));
+  border: 2px solid var(--minecraft-brown-dark);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.enchanting-table .magic-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.enchanting-table .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--minecraft-purple);
+  border-radius: 50%;
+  animation: magicFloat 4s ease-in-out infinite;
+}
+
+@keyframes magicFloat {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Fornalha */
+.furnace {
+  --furnace-size: 8rem;
+  position: relative;
+  width: var(--furnace-size);
+  height: calc(var(--furnace-size) * 1.2);
+  margin: 2rem auto;
+  transform-style: preserve-3d;
+  transform: rotateX(-15deg) rotateY(25deg);
+}
+
+.furnace .body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: var(--texture-stone);
+  border: 3px solid var(--minecraft-gray-dark);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.furnace .door {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background: var(--minecraft-gray-dark);
+  border: 2px solid var(--minecraft-gray);
+  border-radius: 4px;
+}
+
+.furnace .fire {
+    position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 20%;
+  background: linear-gradient(to top, var(--minecraft-orange), var(--minecraft-red));
+  border-radius: 50% 50% 0 0;
+  animation: fireFlicker 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes fireFlicker {
+  0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+/* Variáveis CSS para texturas */
+:root {
+  --texture-diamond: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjN0FEQ0ZGIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzRGRkZGRiIvPgo8L3N2Zz4K');
+  --texture-emerald: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjNTBEMjUwIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzRDQ0Y1MCIvPgo8L3N2Zz4K');
+  --texture-gold: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZENzAwIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iI0ZGRDcwMCIvPgo8L3N2Zz4K');
+  --texture-iron: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjQ0FDQUNBIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iI0Q5RENEOSIvPgo8L3N2Zz4K');
+  --texture-coal: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMzMzMzMzIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzIyMjIyMiIvPgo8L3N2Zz4K');
+  --texture-redstone: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkY0NDQ0Ii8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iI0ZGNjY2NiIvPgo8L3N2Zz4K');
+  --texture-obsidian: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMTExMTExIi8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K');
+  --texture-grass-top: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjNTU5OTU1Ii8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzQ0QzQ0NCIvPgo8L3N2Zz4K');
+  --texture-dirt: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjOEE1NzQ0Ii8+CjxwYXRoIGQ9Ik0xNiAxNkwzMiAwTDUwIDE2TDMyIDMyTDE2IDE2WiIgZmlsbD0iIzY5NDQyMCIvPgo8L3N2Zz4K');
+  
+  /* Cores do Steve */
+  --minecraft-skin-color: #D2B48C;
+  --minecraft-blue-shirt: #4A90E2;
+  --minecraft-blue-pants: #2E5BB8;
+  --minecraft-purple: #9B59B6;
+  --minecraft-dark-purple: #8E44AD;
+  --minecraft-orange: #E67E22;
+  --minecraft-red: #E74C3C;
+}
+
+/* ===== FIM DAS ESTRUTURAS 3D ===== */
+
+/* Responsividade mantida */
+@media (max-width: 768px) {
+    :root {
+        --minecraft-block-size: 12px;
+        --minecraft-border-thickness: 1px;
+        --minecraft-shadow-offset: 2px;
+    }
+    
+    .rotinacraft-logo-text {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .nav-tab {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .minecraft-button {
+        padding: 10px 20px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --minecraft-block-size: 8px;
+        --minecraft-border-thickness: 1px;
+        --minecraft-shadow-offset: 1px;
+    }
+    
+    .rotinacraft-logo-text {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .nav-tab {
+        padding: 6px 8px;
+        font-size: 0.6rem;
+    }
+    
+    .minecraft-button {
+        padding: 8px 16px;
+        font-size: 0.6rem;
+    }
+} 

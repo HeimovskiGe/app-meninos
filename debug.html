@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug ROTINACRAFT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .debug-section {
+            background: #444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .debug-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .debug-button:hover {
+            background: #0056b3;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #28a745;
+        }
+        .status.error {
+            background: #dc3545;
+        }
+        .status.info {
+            background: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🐛 Debug ROTINACRAFT</h1>
+        
+        <div class="debug-section">
+            <h2>🔍 Status do Sistema</h2>
+            <div id="system-status" class="status info">Verificando...</div>
+        </div>
+
+        <div class="debug-section">
+            <h2>🧪 Testes</h2>
+            <button class="debug-button" onclick="testJavaScript()">Testar JavaScript</button>
+            <button class="debug-button" onclick="testLocalStorage()">Testar LocalStorage</button>
+            <button class="debug-button" onclick="testDOM()">Testar DOM</button>
+            <button class="debug-button" onclick="testScript()">Testar Script Principal</button>
+        </div>
+
+        <div class="debug-section">
+            <h2>📊 Resultados</h2>
+            <div id="test-results"></div>
+        </div>
+
+        <div class="debug-section">
+            <h2>📝 Console Log</h2>
+            <div id="console-output" style="background: #000; padding: 10px; border-radius: 5px; font-family: monospace; height: 200px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Capturar logs do console
+        const originalLog = console.log;
+        const originalError = console.error;
+        const consoleOutput = document.getElementById('console-output');
+
+        function addToConsole(message, type = 'log') {
+            const div = document.createElement('div');
+            div.style.color = type === 'error' ? '#ff6b6b' : '#4ecdc4';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '));
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        // Testar JavaScript básico
+        function testJavaScript() {
+            const resultsDiv = document.getElementById('test-results');
+            try {
+                const testArray = [1, 2, 3, 4, 5];
+                const sum = testArray.reduce((a, b) => a + b, 0);
+                
+                if (sum === 15) {
+                    resultsDiv.innerHTML = '<div class="status success">✅ JavaScript básico funcionando!</div>';
+                } else {
+                    resultsDiv.innerHTML = '<div class="status error">❌ Erro no JavaScript básico</div>';
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="status error">❌ Erro JavaScript: ${error.message}</div>`;
+            }
+        }
+
+        // Testar LocalStorage
+        function testLocalStorage() {
+            const resultsDiv = document.getElementById('test-results');
+            try {
+                localStorage.setItem('test', 'ROTINACRAFT');
+                const value = localStorage.getItem('test');
+                
+                if (value === 'ROTINACRAFT') {
+                    resultsDiv.innerHTML = '<div class="status success">✅ LocalStorage funcionando!</div>';
+                } else {
+                    resultsDiv.innerHTML = '<div class="status error">❌ Erro no LocalStorage</div>';
+                }
+                
+                localStorage.removeItem('test');
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="status error">❌ Erro LocalStorage: ${error.message}</div>`;
+            }
+        }
+
+        // Testar DOM
+        function testDOM() {
+            const resultsDiv = document.getElementById('test-results');
+            try {
+                const testElement = document.createElement('div');
+                testElement.textContent = 'Teste DOM';
+                document.body.appendChild(testElement);
+                
+                if (document.body.contains(testElement)) {
+                    resultsDiv.innerHTML = '<div class="status success">✅ DOM funcionando!</div>';
+                    document.body.removeChild(testElement);
+                } else {
+                    resultsDiv.innerHTML = '<div class="status error">❌ Erro no DOM</div>';
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="status error">❌ Erro DOM: ${error.message}</div>`;
+            }
+        }
+
+        // Testar script principal
+        function testScript() {
+            const resultsDiv = document.getElementById('test-results');
+            try {
+                // Verificar se o script foi carregado
+                if (typeof MinecraftRoutineSystem !== 'undefined') {
+                    resultsDiv.innerHTML = '<div class="status success">✅ Classe MinecraftRoutineSystem carregada!</div>';
+                } else {
+                    resultsDiv.innerHTML = '<div class="status error">❌ Classe MinecraftRoutineSystem não encontrada</div>';
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="status error">❌ Erro ao testar script: ${error.message}</div>`;
+            }
+        }
+
+        // Verificar status do sistema
+        function checkSystemStatus() {
+            const statusDiv = document.getElementById('system-status');
+            
+            try {
+                if (typeof window !== 'undefined') {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = '✅ Sistema funcionando! JavaScript ativo.';
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = '❌ Erro: JavaScript não está funcionando.';
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ Erro: ' + error.message;
+            }
+        }
+
+        // Inicializar quando a página carregar
+        window.addEventListener('load', () => {
+            checkSystemStatus();
+            console.log('🐛 Página de debug carregada!');
+            console.log('🔍 Verificando funcionalidades...');
+        });
+
+        // Log de inicialização
+        console.log('🐛 Debug ROTINACRAFT - Sistema de teste ativo');
+    </script>
+
+    <!-- Carregar script principal -->
+    <script src="script.js"></script>
+</body>
+</html>

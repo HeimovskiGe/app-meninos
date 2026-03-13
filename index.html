@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROTINACRAFT - Sistema de Rotinas Kids com Tema Minecraft</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="minecraft-background">
+        <div class="minecraft-overlay"></div>
+        
+        <!-- Header -->
+        <header class="minecraft-header">
+            <div class="header-content">
+                <div class="rotinacraft-logo-text">ROTINACRAFT</div>
+                <div class="header-subtitle">Sistema de Rotinas Kids com Tema Minecraft</div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="minecraft-nav">
+            <div class="nav-container">
+                <button class="nav-tab active" data-tab="dashboard">
+                    🏠 Dashboard
+                </button>
+                <button class="nav-tab" data-tab="tasks">
+                    📝 Tarefas
+                </button>
+                <button class="nav-tab" data-tab="achievements">
+                    🏆 Conquistas
+                </button>
+                <button class="nav-tab" data-tab="crafting">
+                    ⚒️ Crafting
+                </button>
+                <button class="nav-tab" data-tab="settings">
+                    ⚙️ Configurações
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content" style="display: block;">
+                <div class="content-grid">
+                    <!-- World Level Section -->
+                    <div class="minecraft-panel world-level-panel">
+                        <div class="panel-header">
+                            <h2>🌍 Nível do Mundo</h2>
+                        </div>
+                        <div class="panel-content">
+                            <div class="world-level-info">
+                                <div class="level-display">
+                                    <span class="level-number" id="world-level">1</span>
+                                    <span class="level-label">Nível</span>
+                                </div>
+                                <div class="experience-display" id="world-experience">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                    <span>0 / 1000 XP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Participant Section -->
+                    <div class="minecraft-panel">
+                        <div class="panel-header">
+                            <h2>👤 Adicionar Participante</h2>
+                        </div>
+                        <div class="panel-content">
+                            <form id="add-participant-form" class="minecraft-form">
+                                <div class="form-group">
+                                    <label for="participant-name">Nome:</label>
+                                    <input type="text" id="participant-name" class="minecraft-input" placeholder="Digite o nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="participant-avatar">Avatar:</label>
+                                    <select id="participant-avatar" class="minecraft-select">
+                                        <option value="stive70">Steve 70</option>
+                                        <option value="alex70">Alex 70</option>
+                                        <option value="warden">Warden</option>
+                                        <option value="allay7">Allay</option>
+                                        <option value="axolotl1">Axolotl</option>
+                                        <option value="oak_tree">Carvalho</option>
+                                        <option value="stone">Pedra</option>
+                                        <option value="grass">Grama</option>
+                                        <option value="diamond_ore">Minério de Diamante</option>
+                                        <option value="emerald_ore">Minério de Esmeralda</option>
+                                        <option value="gold_ore">Minério de Ouro</option>
+                                        <option value="iron_ore">Minério de Ferro</option>
+                                        <option value="coal_ore">Minério de Carvão</option>
+                                        <option value="redstone_ore">Minério de Redstone</option>
+                                        <option value="lapis_ore">Minério de Lápis</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="minecraft-button primary">➕ Adicionar Participante</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Participants Section -->
+                    <div class="minecraft-panel">
+                        <div class="panel-header">
+                            <h2>👥 Participantes</h2>
+                        </div>
+                        <div class="panel-content">
+                            <div id="participants-container">
+                                <!-- Participantes serão renderizados aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Tab -->
+            <div id="tasks" class="tab-content" style="display: none;">
+                <div class="content-grid">
+                    <!-- Add Task Section -->
+                    <div class="minecraft-panel">
+                        <div class="panel-header">
+                            <h2>📝 Criar Nova Tarefa</h2>
+                        </div>
+                        <div class="panel-content">
+                            <form id="add-task-form" class="minecraft-form">
+                                <div class="form-group">
+                                    <label for="task-title">Título:</label>
+                                    <input type="text" id="task-title" class="minecraft-input" placeholder="Digite o título da tarefa" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-description">Descrição:</label>
+                                    <textarea id="task-description" class="minecraft-input" placeholder="Digite a descrição da tarefa" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-points">Pontos:</label>
+                                    <input type="number" id="task-points" class="minecraft-input" value="10" min="1" max="100">
+                                </div>
+                                <button type="submit" class="minecraft-button primary">➕ Criar Tarefa</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Tasks List Section -->
+                    <div class="minecraft-panel">
+                        <div class="panel-header">
+                            <h2>📋 Lista de Tarefas</h2>
+                        </div>
+                        <div class="panel-content">
+                            <div id="tasks-container">
+                                <!-- Tarefas serão renderizadas aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Tab -->
+            <div id="achievements" class="tab-content" style="display: none;">
+                <div class="content-grid">
+                    <div id="achievements-container">
+                        <!-- Conquistas serão renderizadas aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crafting Tab -->
+            <div id="crafting" class="tab-content" style="display: none;">
+                <div class="content-grid">
+                    <div id="crafting-container">
+                        <!-- Sistema de crafting será renderizado aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content" style="display: none;">
+                <div class="content-grid">
+                    <div id="settings-container">
+                        <!-- Configurações serão renderizadas aqui -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Bar -->
+        <div class="minecraft-bottom-bar">
+            <div class="bottom-bar-content">
+                <span>ROTINACRAFT v1.0 - Sistema de Rotinas Kids com Tema Minecraft</span>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="minecraft-floating-btn" onclick="window.rotinacraftSystem?.showNotification('🎮 Sistema funcionando perfeitamente!')">
+            🎮
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

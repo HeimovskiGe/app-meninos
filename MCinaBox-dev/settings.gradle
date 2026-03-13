@@ -1,0 +1,3 @@
+include ':app'
+include ':boat'
+rootProject.name='MCinaBox'
