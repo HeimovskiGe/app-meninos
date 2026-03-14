@@ -2,205 +2,196 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROTINACRAFT - Sistema de Rotinas Kids com Tema Minecraft</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ROTINACRAFT - Jogo de Rotina RPG</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="minecraft-background">
-        <div class="minecraft-overlay"></div>
-        
-        <!-- Header -->
-        <header class="minecraft-header">
-            <div class="header-content">
-                <div class="rotinacraft-logo-text">ROTINACRAFT</div>
-                <div class="header-subtitle">Sistema de Rotinas Kids com Tema Minecraft</div>
-            </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="minecraft-nav">
-            <div class="nav-container">
-                <button class="nav-tab active" data-tab="dashboard">
-                    🏠 Dashboard
-                </button>
-                <button class="nav-tab" data-tab="tasks">
-                    📝 Tarefas
-                </button>
-                <button class="nav-tab" data-tab="achievements">
-                    🏆 Conquistas
-                </button>
-                <button class="nav-tab" data-tab="crafting">
-                    ⚒️ Crafting
-                </button>
-                <button class="nav-tab" data-tab="settings">
-                    ⚙️ Configurações
-                </button>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Dashboard Tab -->
-            <div id="dashboard" class="tab-content" style="display: block;">
-                <div class="content-grid">
-                    <!-- World Level Section -->
-                    <div class="minecraft-panel world-level-panel">
-                        <div class="panel-header">
-                            <h2>🌍 Nível do Mundo</h2>
-                        </div>
-                        <div class="panel-content">
-                            <div class="world-level-info">
-                                <div class="level-display">
-                                    <span class="level-number" id="world-level">1</span>
-                                    <span class="level-label">Nível</span>
-                                </div>
-                                <div class="experience-display" id="world-experience">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                    <span>0 / 1000 XP</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Add Participant Section -->
-                    <div class="minecraft-panel">
-                        <div class="panel-header">
-                            <h2>👤 Adicionar Participante</h2>
-                        </div>
-                        <div class="panel-content">
-                            <form id="add-participant-form" class="minecraft-form">
-                                <div class="form-group">
-                                    <label for="participant-name">Nome:</label>
-                                    <input type="text" id="participant-name" class="minecraft-input" placeholder="Digite o nome" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="participant-avatar">Avatar:</label>
-                                    <select id="participant-avatar" class="minecraft-select">
-                                        <option value="stive70">Steve 70</option>
-                                        <option value="alex70">Alex 70</option>
-                                        <option value="warden">Warden</option>
-                                        <option value="allay7">Allay</option>
-                                        <option value="axolotl1">Axolotl</option>
-                                        <option value="oak_tree">Carvalho</option>
-                                        <option value="stone">Pedra</option>
-                                        <option value="grass_block">Grama</option>
-                                        <option value="diamond_ore">Minério de Diamante</option>
-                                        <option value="emerald">Esmeralda</option>
-                                        <option value="gold">Ouro</option>
-                                        <option value="iron_ore">Minério de Ferro</option>
-                                        <option value="coal_ore">Minério de Carvão</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="minecraft-button primary">➕ Adicionar Participante</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Participants Section -->
-                    <div class="minecraft-panel">
-                        <div class="panel-header">
-                            <h2>👥 Participantes</h2>
-                        </div>
-                        <div class="panel-content">
-                            <div id="participants-container">
-                                <!-- Participantes serão renderizados aqui -->
-                            </div>
-                        </div>
-                    </div>
+    <!-- ========== TELA DE TITULO ========== -->
+    <div id="screen-title" class="screen active">
+        <div class="title-bg">
+            <div class="title-content">
+                <div class="title-logo">ROTINA<span>CRAFT</span></div>
+                <p class="title-sub">Aventura de Rotina para Criancas</p>
+                <div class="title-btns">
+                    <button class="mc-btn" id="btn-play">Jogar</button>
+                    <button class="mc-btn mc-btn-stone" id="btn-about">Sobre</button>
                 </div>
             </div>
+            <div class="title-ground"></div>
+        </div>
+    </div>
 
-            <!-- Tasks Tab -->
-            <div id="tasks" class="tab-content" style="display: none;">
-                <div class="content-grid">
-                    <!-- Add Task Section -->
-                    <div class="minecraft-panel">
-                        <div class="panel-header">
-                            <h2>📝 Criar Nova Tarefa</h2>
-                        </div>
-                        <div class="panel-content">
-                            <form id="add-task-form" class="minecraft-form">
-                                <div class="form-group">
-                                    <label for="task-title">Título:</label>
-                                    <input type="text" id="task-title" class="minecraft-input" placeholder="Digite o título da tarefa" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="task-description">Descrição:</label>
-                                    <textarea id="task-description" class="minecraft-input" placeholder="Digite a descrição da tarefa" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="task-assignee">Participante:</label>
-                                    <select id="task-assignee" class="minecraft-select">
-                                        <option value="">Sem atribuição</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="task-points">Pontos:</label>
-                                    <input type="number" id="task-points" class="minecraft-input" value="10" min="1" max="100">
-                                </div>
-                                <button type="submit" class="minecraft-button primary">➕ Criar Tarefa</button>
-                            </form>
-                        </div>
-                    </div>
+    <!-- ========== TELA SELECAO PERSONAGEM ========== -->
+    <div id="screen-select" class="screen">
+        <div class="select-bg">
+            <h2 class="mc-title">Escolha seu Heroi</h2>
+            <div class="char-grid" id="char-grid"></div>
+            <div class="name-area">
+                <label>Seu Nome:</label>
+                <input type="text" id="player-name" placeholder="Digite seu nome..." maxlength="15">
+            </div>
+            <div class="select-btns">
+                <button class="mc-btn mc-btn-stone" id="btn-back-title">Voltar</button>
+                <button class="mc-btn" id="btn-start">Comecar Aventura</button>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Tasks List Section -->
-                    <div class="minecraft-panel">
-                        <div class="panel-header">
-                            <h2>📋 Lista de Tarefas</h2>
-                        </div>
-                        <div class="panel-content">
-                            <div id="tasks-container">
-                                <!-- Tarefas serão renderizadas aqui -->
-                            </div>
-                        </div>
-                    </div>
+    <!-- ========== TELA DO JOGO ========== -->
+    <div id="screen-game" class="screen">
+        <!-- HUD -->
+        <div class="hud">
+            <div class="hud-left">
+                <div class="hud-avatar" id="hud-avatar"></div>
+                <div class="hud-info">
+                    <div class="hud-name" id="hud-name">Jogador</div>
+                    <div class="hud-lvl" id="hud-lvl">Nivel 1</div>
                 </div>
             </div>
-
-            <!-- Achievements Tab -->
-            <div id="achievements" class="tab-content" style="display: none;">
-                <div class="content-grid">
-                    <div id="achievements-container">
-                        <!-- Conquistas serão renderizadas aqui -->
-                    </div>
+            <div class="hud-mid">
+                <div class="xp-bar">
+                    <div class="xp-fill" id="xp-fill"></div>
+                    <span class="xp-text" id="xp-text">0/100 XP</span>
                 </div>
             </div>
-
-            <!-- Crafting Tab -->
-            <div id="crafting" class="tab-content" style="display: none;">
-                <div class="content-grid">
-                    <div id="crafting-container">
-                        <!-- Sistema de crafting será renderizado aqui -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Tab -->
-            <div id="settings" class="tab-content" style="display: none;">
-                <div class="content-grid">
-                    <div id="settings-container">
-                        <!-- Configurações serão renderizadas aqui -->
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Bottom Bar -->
-        <div class="minecraft-bottom-bar">
-            <div class="bottom-bar-content">
-                <span>ROTINACRAFT v1.0 - Sistema de Rotinas Kids com Tema Minecraft</span>
+            <div class="hud-right">
+                <div class="hud-coins" id="hud-coins">0</div>
+                <div class="hud-hearts" id="hud-hearts"></div>
             </div>
         </div>
 
-        <!-- Floating Action Button -->
-        <button class="minecraft-floating-btn" onclick="window.rotinacraftSystem?.showNotification('🎮 Sistema funcionando perfeitamente!')">
-            🎮
-        </button>
+        <!-- Mundo -->
+        <div class="world" id="world">
+            <div class="sky" id="sky"></div>
+            <div class="scene">
+                <div class="character" id="character"></div>
+                <div class="house" id="house"></div>
+            </div>
+            <div class="ground"></div>
+            <div class="msg-bubble" id="msg-bubble">Bom dia! Complete suas missoes!</div>
+        </div>
+
+        <!-- Hotbar -->
+        <div class="hotbar">
+            <button class="hb-slot active" data-tab="quests" id="tab-quests">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/sword.png" alt="">
+                <span>Missoes</span>
+            </button>
+            <button class="hb-slot" data-tab="inventory" id="tab-inventory">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/diamond.png" alt="">
+                <span>Itens</span>
+            </button>
+            <button class="hb-slot" data-tab="achievements" id="tab-achievements">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/gold_apple.png" alt="">
+                <span>Troféus</span>
+            </button>
+            <button class="hb-slot" data-tab="shop" id="tab-shop">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/emerald.png" alt="">
+                <span>Loja</span>
+            </button>
+            <button class="hb-slot" data-tab="config" id="tab-config">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/grindstone.png" alt="">
+                <span>Config</span>
+            </button>
+        </div>
+
+        <!-- Paineis -->
+        <div class="panels">
+            <div id="panel-quests" class="panel active">
+                <div class="panel-top">
+                    <h3>Missoes do Dia</h3>
+                    <button class="mc-btn mc-btn-sm" id="btn-add-quest">+ Nova</button>
+                </div>
+                <div class="cats">
+                    <button class="cat active" data-cat="all">Todas</button>
+                    <button class="cat" data-cat="morning">Manha</button>
+                    <button class="cat" data-cat="afternoon">Tarde</button>
+                    <button class="cat" data-cat="night">Noite</button>
+                </div>
+                <div id="quests-list" class="quest-list"></div>
+            </div>
+            <div id="panel-inventory" class="panel">
+                <div class="panel-top"><h3>Inventario</h3></div>
+                <div id="inv-grid" class="inv-grid"></div>
+            </div>
+            <div id="panel-achievements" class="panel">
+                <div class="panel-top"><h3>Conquistas</h3></div>
+                <div id="ach-list" class="ach-list"></div>
+            </div>
+            <div id="panel-shop" class="panel">
+                <div class="panel-top"><h3>Loja do Aldeao</h3></div>
+                <div id="shop-list" class="shop-list"></div>
+            </div>
+            <div id="panel-config" class="panel">
+                <div class="panel-top"><h3>Configuracoes</h3></div>
+                <div id="config-area" class="config-area"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- ========== TELA SOBRE ========== -->
+    <div id="screen-about" class="screen">
+        <div class="about-bg">
+            <h2 class="mc-title">Sobre</h2>
+            <p>ROTINACRAFT transforma a rotina diaria em uma aventura estilo Minecraft!</p>
+            <p>Complete missoes, ganhe XP, suba de nivel e colecione itens!</p>
+            <button class="mc-btn mc-btn-stone" id="btn-back-about">Voltar</button>
+        </div>
+    </div>
+
+    <!-- ========== MODAL NOVA MISSAO ========== -->
+    <div id="modal-add" class="modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3>Nova Missao</h3>
+                <button class="modal-x" id="modal-close-add">&times;</button>
+            </div>
+            <form id="form-quest">
+                <label>Nome:</label>
+                <input type="text" id="q-title" placeholder="Ex: Arrumar a cama" required>
+                <label>Periodo:</label>
+                <select id="q-period">
+                    <option value="morning">Manha</option>
+                    <option value="afternoon">Tarde</option>
+                    <option value="night">Noite</option>
+                </select>
+                <label>XP:</label>
+                <select id="q-xp">
+                    <option value="10">10 XP - Facil</option>
+                    <option value="20">20 XP - Media</option>
+                    <option value="30">30 XP - Dificil</option>
+                    <option value="50">50 XP - Epica</option>
+                </select>
+                <label>Icone:</label>
+                <div class="icon-pick" id="icon-pick"></div>
+                <button type="submit" class="mc-btn mc-btn-full">Criar Missao</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== MODAL RECOMPENSA ========== -->
+    <div id="modal-reward" class="modal">
+        <div class="modal-box modal-center">
+            <h3 class="reward-title">Missao Completa!</h3>
+            <div id="reward-info" class="reward-info"></div>
+            <button class="mc-btn" id="btn-close-reward">Legal!</button>
+        </div>
+    </div>
+
+    <!-- ========== MODAL LEVEL UP ========== -->
+    <div id="modal-lvlup" class="modal">
+        <div class="modal-box modal-center modal-gold">
+            <h2 id="lvlup-text" class="lvlup-text">NIVEL 2!</h2>
+            <p>Voce subiu de nivel!</p>
+            <p id="lvlup-reward" class="lvlup-reward"></p>
+            <button class="mc-btn" id="btn-close-lvlup">Incrivel!</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
