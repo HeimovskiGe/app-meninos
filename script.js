@@ -42,6 +42,9 @@ var ACHS = [
     {id:'streak7',name:'Semana Incrivel',desc:'7 dias seguidos',icon:'🔥',fn:function(s){return s.streak>=7}},
     {id:'items3',name:'Colecionador',desc:'Tenha 3 itens',icon:'📦',fn:function(s){return s.inv.length>=3}},
     {id:'allday',name:'Dia Perfeito',desc:'Complete todas de um dia',icon:'🎯',fn:function(s){return s.perfect}},
+    {id:'mg_first',name:'Primeiro Mini-Jogo',desc:'Complete um mini-jogo',icon:'🎮',fn:function(s){return s.mg_brushing_played>=1||s.mg_dressing_played>=1||s.mg_eating_played>=1||s.mg_bedtime_played>=1||s.mg_handwash_played>=1}},
+    {id:'mg_3stars',name:'Perfeicao',desc:'3 estrelas em um mini-jogo',icon:'🌟',fn:function(s){return s.mg_brushing_bestStars>=3||s.mg_dressing_bestStars>=3||s.mg_eating_bestStars>=3||s.mg_bedtime_bestStars>=3||s.mg_handwash_bestStars>=3}},
+    {id:'mg_all',name:'Explorador Completo',desc:'Jogue todos os 5 mini-jogos',icon:'🗺️',fn:function(s){return s.mg_brushing_played>0&&s.mg_dressing_played>0&&s.mg_eating_played>0&&s.mg_bedtime_played>0&&s.mg_handwash_played>0}},
 ];
 
 var SHOP = [
@@ -77,6 +80,13 @@ function defaults() {
         streak:0, lastDate:null,
         quests:[], inv:[], achs:[],
         started:false,
+        // Mini-games state
+        mg_brushing_played:0, mg_brushing_bestStars:0, mg_brushing_lastPlayed:null,
+        mg_dressing_played:0, mg_dressing_bestStars:0, mg_dressing_lastPlayed:null,
+        mg_eating_played:0, mg_eating_bestStars:0, mg_eating_lastPlayed:null,
+        mg_bedtime_played:0, mg_bedtime_bestStars:0, mg_bedtime_lastPlayed:null,
+        mg_handwash_played:0, mg_handwash_bestStars:0, mg_handwash_lastPlayed:null,
+        mg_demos_seen:[],
     };
 }
 
@@ -242,6 +252,7 @@ function checkAchs() {
 // ===== RENDER =====
 function updateAll() {
     updateHud(); updateWorld(); renderQuests(); renderInv(); renderAchs(); renderShop(); renderConfig();
+    if(typeof renderMap==='function') renderMap();
 }
 
 function updateHud() {
@@ -309,6 +320,7 @@ function renderQuests() {
         h+='<div class="q-per">'+per+'</div></div>';
         h+='<div class="q-btns">';
         if(!q.done) h+='<button class="q-btn do" data-qid="'+q.id+'" title="Completar">✓</button>';
+        h+='<button class="q-btn demo" data-demo="'+q.title+'" title="Como fazer?">?</button>';
         if(q.custom) h+='<button class="q-btn del" data-qid="'+q.id+'" title="Remover">✕</button>';
         h+='</div></div>';
     }
@@ -528,6 +540,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var qb = e.target.closest('.q-btn.do');
         if (qb && qb.dataset.qid) {
             completeQuest(parseInt(qb.dataset.qid));
+            return;
+        }
+
+        // Demo "Como fazer?"
+        var dm = e.target.closest('.q-btn.demo');
+        if (dm && dm.dataset.demo && typeof openDemo==='function') {
+            openDemo(dm.dataset.demo);
             return;
         }
 
