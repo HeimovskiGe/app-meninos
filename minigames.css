@@ -1,0 +1,668 @@
+/* ROTINACRAFT - Mini-Jogos Estilos */
+
+/* ===== MAPA DO MUNDO ===== */
+.map-world {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0;
+    align-items: center;
+}
+.map-node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--gui-slot);
+    border: 3px solid;
+    border-color: var(--gui-border-light) var(--gui-border-dark) var(--gui-border-dark) var(--gui-border-light);
+    cursor: pointer;
+    width: 100%;
+    max-width: 340px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.map-node:hover:not(.locked) {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(255,170,0,0.4);
+}
+.map-node.locked {
+    opacity: 0.45;
+    filter: grayscale(0.8);
+    cursor: not-allowed;
+}
+.map-node .map-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--stone);
+    background: var(--stone-dark);
+    position: relative;
+}
+.map-node .map-icon img {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+}
+.map-node.locked .map-icon::after {
+    content: '🔒';
+    position: absolute;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.map-node.locked .map-icon img {
+    opacity: 0.3;
+}
+.map-node-info {
+    flex: 1;
+    min-width: 0;
+}
+.map-node-name {
+    font-size: 8px;
+    color: var(--text-white);
+    text-shadow: 1px 1px 0 #333;
+    margin-bottom: 2px;
+}
+.map-node-desc {
+    font-size: 6px;
+    color: #ddd;
+    text-shadow: 1px 1px 0 #333;
+    margin-bottom: 2px;
+}
+.map-node-unlock {
+    font-size: 5px;
+    color: var(--gold);
+    text-shadow: 1px 1px 0 #333;
+}
+.map-node-stars {
+    font-size: 8px;
+    min-width: 40px;
+    text-align: right;
+}
+.map-path {
+    width: 4px;
+    height: 20px;
+    background: var(--stone);
+    position: relative;
+}
+.map-path.unlocked {
+    background: var(--emerald);
+}
+
+/* Biome colors */
+.map-node[data-biome="village"] { border-left: 5px solid var(--grass); }
+.map-node[data-biome="forest"] { border-left: 5px solid #2E7D32; }
+.map-node[data-biome="cave"] { border-left: 5px solid var(--stone-dark); }
+.map-node[data-biome="desert"] { border-left: 5px solid var(--gold); }
+.map-node[data-biome="nether"] { border-left: 5px solid #8B0000; }
+
+/* ===== MINIJOGO FULLSCREEN ===== */
+.mg-fullscreen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, var(--obsidian) 0%, #1A1A2E 100%);
+}
+.mg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--wood-dark);
+    border-bottom: 3px solid var(--wood);
+    flex-shrink: 0;
+}
+.mg-title {
+    font-size: 9px;
+    color: var(--gold);
+    text-shadow: 1px 1px 0 #333;
+    flex: 1;
+    text-align: center;
+}
+.mg-timer {
+    font-size: 10px;
+    color: var(--emerald);
+    text-shadow: 1px 1px 0 #000;
+    min-width: 50px;
+    text-align: right;
+}
+.mg-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    gap: 12px;
+}
+.mg-footer {
+    padding: 8px 12px;
+    background: var(--stone-dark);
+    border-top: 2px solid var(--stone);
+    flex-shrink: 0;
+}
+.mg-progress {
+    height: 10px;
+    background: #333;
+    border: 2px solid var(--stone);
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.mg-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(180deg, #80FF20, var(--emerald));
+    transition: width 0.3s;
+}
+.mg-step-text {
+    font-size: 6px;
+    color: #aaa;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* ===== ESCOVACAO - JOGO ===== */
+.brush-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+}
+.brush-steve {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.brush-steve img {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    animation: idle 2s ease-in-out infinite;
+}
+.brush-bubble {
+    background: rgba(0,0,0,0.85);
+    color: var(--gold);
+    font-size: 7px;
+    padding: 6px 12px;
+    border: 2px solid var(--stone);
+    text-align: center;
+    max-width: 220px;
+    margin-top: 6px;
+    animation: bubble-in 0.4s ease-out;
+    text-shadow: 1px 1px 0 #000;
+}
+@keyframes bubble-in {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Teeth diagram */
+.brush-mouth {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-width: 260px;
+}
+.teeth-row {
+    display: flex;
+    gap: 4px;
+}
+.tooth-quad {
+    flex: 1;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    color: #ddd;
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+.tooth-quad .quad-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: rgba(65, 205, 52, 0.3);
+    transition: height 0.1s linear;
+    pointer-events: none;
+}
+.tooth-quad.active {
+    animation: quad-pulse 1s ease-in-out infinite;
+    border-color: var(--gold);
+    background: rgba(255, 170, 0, 0.1);
+}
+@keyframes quad-pulse {
+    0%, 100% { box-shadow: inset 0 0 8px rgba(255,170,0,0.2); }
+    50% { box-shadow: inset 0 0 16px rgba(255,170,0,0.5); }
+}
+.tooth-quad.clean {
+    animation: none;
+    border-color: var(--emerald);
+    background: rgba(65, 205, 52, 0.15);
+}
+.tooth-quad.clean::after {
+    content: '✨';
+    position: absolute;
+    font-size: 18px;
+    animation: sparkle 0.8s ease-out forwards;
+}
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+    100% { opacity: 0.6; transform: scale(1) rotate(360deg); }
+}
+
+/* Brush instruction */
+.brush-instruction {
+    font-size: 7px;
+    color: var(--diamond);
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid var(--stone-dark);
+    max-width: 280px;
+}
+.brush-tip {
+    font-size: 6px;
+    color: #aaa;
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* Tap target button for simple steps */
+.brush-tap-target {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    border: 4px solid var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    animation: pulse 1s ease-in-out infinite;
+}
+.brush-tap-target:hover {
+    transform: scale(1.1);
+}
+.brush-tap-target:active {
+    transform: scale(0.95);
+}
+
+/* Tap counter for tongue step */
+.brush-tap-counter {
+    font-size: 14px;
+    color: var(--emerald);
+    text-shadow: 2px 2px 0 #000;
+    text-align: center;
+}
+
+/* ===== EATING GAME ===== */
+.eating-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+}
+.eating-food {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    animation: food-bounce 0.5s ease-out;
+}
+.eating-food img {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+}
+@keyframes food-bounce {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+.eating-food-name {
+    font-size: 8px;
+    color: var(--text-white);
+    text-shadow: 1px 1px 0 #000;
+}
+.eating-chests {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+}
+.eating-chest {
+    flex: 1;
+    max-width: 130px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.eating-chest:hover {
+    transform: scale(1.05);
+}
+.eating-chest.healthy {
+    border-color: var(--emerald);
+}
+.eating-chest.unhealthy {
+    border-color: var(--redstone);
+}
+.eating-chest-label {
+    font-size: 6px;
+    text-shadow: 1px 1px 0 #000;
+}
+.eating-chest.healthy .eating-chest-label { color: var(--emerald); }
+.eating-chest.unhealthy .eating-chest-label { color: var(--redstone); }
+.eating-score {
+    font-size: 8px;
+    color: var(--emerald);
+    text-shadow: 1px 1px 0 #000;
+}
+.eating-feedback {
+    font-size: 7px;
+    padding: 6px 12px;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000;
+    animation: bubble-in 0.3s ease-out;
+}
+.eating-feedback.correct { color: var(--emerald); }
+.eating-feedback.wrong { color: var(--redstone); }
+
+/* ===== BEDTIME ORDERING GAME ===== */
+.bedtime-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+}
+.bedtime-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.bedtime-card:hover:not(.locked):not(.wrong) {
+    transform: scale(1.02);
+    border-color: var(--gold);
+}
+.bedtime-card.locked {
+    border-color: var(--emerald);
+    background: rgba(65, 205, 52, 0.15);
+    cursor: default;
+}
+.bedtime-card.wrong {
+    animation: shake 0.4s ease-out;
+    border-color: var(--redstone);
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+.bedtime-card-icon {
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+}
+.bedtime-card-text {
+    font-size: 7px;
+    color: var(--text-white);
+    text-shadow: 1px 1px 0 #333;
+}
+.bedtime-card.locked .bedtime-card-text {
+    color: var(--emerald);
+}
+.bedtime-card-num {
+    font-size: 8px;
+    color: var(--gold);
+    text-shadow: 1px 1px 0 #000;
+    min-width: 16px;
+}
+
+/* ===== HANDWASH GAME ===== */
+.handwash-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+}
+.hand-diagram {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    width: 100%;
+    max-width: 220px;
+}
+.hand-zone {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    color: #ddd;
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.hand-zone .quad-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: rgba(92, 219, 213, 0.3);
+    transition: height 0.1s linear;
+    pointer-events: none;
+}
+.hand-zone.active {
+    animation: quad-pulse 1s ease-in-out infinite;
+    border-color: var(--diamond);
+    background: rgba(92, 219, 213, 0.1);
+}
+.hand-zone.clean {
+    animation: none;
+    border-color: var(--emerald);
+    background: rgba(65, 205, 52, 0.15);
+}
+.hand-zone.clean::after {
+    content: '💧';
+    position: absolute;
+    font-size: 16px;
+    animation: sparkle 0.8s ease-out forwards;
+}
+
+/* ===== DRESSING GAME ===== */
+.dressing-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+}
+.dressing-weather {
+    font-size: 9px;
+    color: var(--gold);
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    padding: 6px 12px;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid var(--stone-dark);
+}
+.dressing-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+}
+.dressing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    background: var(--gui-slot);
+    border: 3px solid var(--stone);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.dressing-item:hover {
+    transform: scale(1.05);
+    border-color: var(--gold);
+}
+.dressing-item.selected {
+    border-color: var(--emerald);
+    background: rgba(65, 205, 52, 0.15);
+}
+.dressing-item.wrong-choice {
+    animation: shake 0.4s ease-out;
+    border-color: var(--redstone);
+}
+.dressing-item-icon {
+    font-size: 24px;
+}
+.dressing-item-name {
+    font-size: 5px;
+    color: #ddd;
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+}
+
+/* ===== RESULTADO ===== */
+.mg-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+.mg-result-stars {
+    font-size: 28px;
+    display: flex;
+    gap: 8px;
+}
+.mg-result-stars span {
+    display: inline-block;
+    animation: star-pop 0.4s ease-out backwards;
+}
+.mg-result-stars span:nth-child(2) { animation-delay: 0.2s; }
+.mg-result-stars span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes star-pop {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    70% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.mg-result-text {
+    font-size: 11px;
+    color: var(--gold);
+    text-shadow: 2px 2px 0 #333;
+}
+.mg-result-rewards {
+    font-size: 10px;
+    color: var(--emerald);
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* ===== DEMO (COMO FAZER) ===== */
+.demo-box {
+    max-width: 340px;
+}
+.demo-body {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-height: 180px;
+}
+.demo-char {
+    width: 56px;
+    height: 56px;
+    image-rendering: pixelated;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    animation: idle 2s ease-in-out infinite;
+}
+.demo-step-icon {
+    font-size: 32px;
+}
+.demo-step-text {
+    font-size: 8px;
+    color: var(--wood-dark);
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+    text-align: center;
+    line-height: 2;
+    padding: 0 8px;
+}
+.demo-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 2px solid var(--stone);
+    margin-top: 4px;
+}
+#demo-step-num {
+    font-size: 7px;
+    color: var(--wood-dark);
+}
+
+/* ===== RESPONSIVO MINIJOGOS ===== */
+@media (max-width: 420px) {
+    .brush-steve img { width: 48px; height: 48px; }
+    .tooth-quad { height: 56px; font-size: 5px; }
+    .brush-tap-target { width: 90px; height: 90px; font-size: 24px; }
+    .map-node { padding: 8px 10px; }
+    .map-node-name { font-size: 7px; }
+    .eating-food { width: 64px; height: 64px; }
+    .eating-food img { width: 36px; height: 36px; }
+}

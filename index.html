@@ -86,6 +86,10 @@
                 <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/gold_apple.png" alt="">
                 <span>Troféus</span>
             </button>
+            <button class="hb-slot" data-tab="map" id="tab-map">
+                <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/clock.png" alt="">
+                <span>Mapa</span>
+            </button>
             <button class="hb-slot" data-tab="shop" id="tab-shop">
                 <img src="minecraft-emoji-e3560/assets/minecraft/textures/font/custom/emerald.png" alt="">
                 <span>Loja</span>
@@ -118,6 +122,10 @@
             <div id="panel-achievements" class="panel">
                 <div class="panel-top"><h3>Conquistas</h3></div>
                 <div id="ach-list" class="ach-list"></div>
+            </div>
+            <div id="panel-map" class="panel">
+                <div class="panel-top"><h3>Mapa do Mundo</h3></div>
+                <div id="map-world" class="map-world"></div>
             </div>
             <div id="panel-shop" class="panel">
                 <div class="panel-top"><h3>Loja do Aldeao</h3></div>
@@ -189,9 +197,43 @@
         </div>
     </div>
 
+    <!-- ========== MODAL MINIJOGO ========== -->
+    <div id="modal-minigame" class="modal">
+        <div class="mg-fullscreen" id="mg-screen">
+            <div class="mg-header">
+                <button class="mc-btn mc-btn-sm" id="mg-back">&larr;</button>
+                <div class="mg-title" id="mg-title">Mini-Jogo</div>
+                <div class="mg-timer" id="mg-timer">2:00</div>
+            </div>
+            <div class="mg-body" id="mg-body"></div>
+            <div class="mg-footer">
+                <div class="mg-progress"><div class="mg-progress-fill" id="mg-progress-fill"></div></div>
+                <div class="mg-step-text" id="mg-step-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MODAL DEMO ========== -->
+    <div id="modal-demo" class="modal">
+        <div class="modal-box demo-box">
+            <div class="modal-head">
+                <h3 id="demo-title">Como fazer</h3>
+                <button class="modal-x" id="demo-close">&times;</button>
+            </div>
+            <div id="demo-body" class="demo-body"></div>
+            <div class="demo-nav">
+                <button class="mc-btn mc-btn-sm mc-btn-stone" id="demo-prev">Anterior</button>
+                <span id="demo-step-num">1/4</span>
+                <button class="mc-btn mc-btn-sm" id="demo-next">Proximo</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div id="toast" class="toast"></div>
 
+    <link rel="stylesheet" href="minigames.css">
     <script src="script.js"></script>
+    <script src="minigames.js"></script>
 </body>
 </html>

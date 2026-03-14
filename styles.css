@@ -373,6 +373,8 @@ body {
 }
 .q-btn:hover { background: var(--stone); }
 .q-btn.do:hover { background: var(--grass); border-color: var(--emerald); }
+.q-btn.demo { font-size: 10px; background: var(--wood-dark); border-color: var(--gold); color: var(--gold); }
+.q-btn.demo:hover { background: var(--wood); }
 .q-btn.del:hover { background: #A33; border-color: var(--redstone); }
 
 /* ===== INVENTARIO ===== */
@@ -547,8 +549,8 @@ body {
 @media (max-width: 420px) {
     .world { height: 140px; }
     .character img { width: 40px; height: 40px; }
-    .hb-slot { padding: 3px 5px; min-width: 44px; }
-    .hb-slot img { width: 16px; height: 16px; }
+    .hb-slot { padding: 3px 4px; min-width: 38px; }
+    .hb-slot img { width: 14px; height: 14px; }
     .hb-slot span { font-size: 4px; }
     .hud-mid { max-width: 100px; }
     .mc-btn { min-width: 130px; font-size: 8px; padding: 8px 16px; }
